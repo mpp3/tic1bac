@@ -1,0 +1,548 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Procedimientos y Funciones</title>
+
+        <link rel="stylesheet" href="dist/reset.css">
+        <link rel="stylesheet" href="dist/reveal.css">
+        <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+        <script src="https://zimjs.org/cdn/1.3.2/createjs.js"></script>
+        <script src="https://zimjs.org/cdn/cat/01/zim.js"></script>
+    </head>
+
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section> <!-- Qué es -->
+                    <section>
+                        <h1>Función</h1>
+                        <p class="fragment fade-up" >
+                            Procedimiento que devuelve un valor.
+                        </p>
+                    </section>
+                    <section>
+                        <p>¿Cuál es la salida por consola del siguiente programa?</p>
+                        <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);"><span class="hljs-meta" style="color: rgb(43, 145, 175);">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string" style="color: rgb(163, 21, 21);">"ticlib.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">void</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">f</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in" style="color: rgb(0, 0, 255);">cout</span> &lt;&lt; <span class="hljs-string" style="color: rgb(163, 21, 21);">"f"</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">void</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">g</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-built_in" style="color: rgb(0, 0, 255);">cout</span> &lt;&lt; <span class="hljs-string" style="color: rgb(163, 21, 21);">"g"</span>;
+    f();
+}
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">main</span><span class="hljs-params">()</span>
+</span>{
+    g();
+}
+                        </pre>
+                        <pre>a) g        b) fg        c) gf        d) fgf</pre>
+                    </section>
+                    <section>
+                        <p>¿Cuál es la salida por consola del siguiente programa?</p>
+                        <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);"><span class="hljs-meta" style="color: rgb(43, 145, 175);">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string" style="color: rgb(163, 21, 21);">"ticlib.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">void</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">f</span><span class="hljs-params">(<span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> x)</span>
+</span>{
+  x = <span class="hljs-number">2</span> * x;
+  <span class="hljs-built_in" style="color: rgb(0, 0, 255);">cout</span> &lt;&lt; x;
+}
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">main</span><span class="hljs-params">()</span>
+</span>{
+  f(<span class="hljs-number">1</span>);
+  f(<span class="hljs-number">2</span>);
+}</pre>
+                        <pre>a) 12        b) 22       c) 24        d) 44 </pre>
+                    </section>
+                    <section>
+                        <h3><span style="color:green">Cálculo</span> vs. <span style="color:red" >Efecto externo</span></h3>
+                        <p class="fragment fade-up" style="color:green">Cálculo: en la memoria (variables)</p>
+                        <p class="fragment fade-up" style="color:red">Efecto externo: fuera de la memoria</p>
+                        <ul>
+                            <li class="fragment fade-up" style="color:red">Consola (cin, cout)</li>
+                            <li class="fragment fade-up" style="color:red">Ventana gráfica</li>
+                            <li class="fragment fade-up" style="color:red">Archivo (disco duro)</li>
+                            <li class="fragment fade-up" style="color:red">Internet</li>
+                        </ul>
+                    </section>
+                    <section data-transition="slide-in none-out">
+
+                        <h3><span style="color:green">Cálculo</span> vs. <span style="color:rgba(255,0,0,0.3)" >Efecto externo</span></h3>
+                        <pre><code data-line-numbers="5,8-10">#include "ticlib.h"
+
+int main()
+{
+  string s {""};
+  cout << "Escriba su nombre: ";
+  cin >> s;
+  if ('a' <= s[0] && s[0] <= 'z') {
+    s[0] -= 32;
+  }
+  cout << "Hello, " << s << "\n";
+}</code></pre>
+                    </section>
+                    <section data-transition="none-in slide-out">
+                        <h3><span style="color:rgba(0,255,0,0.1)">Cálculo</span> vs. <span style="color:red" >Efecto externo</span></h3>
+                        <pre><code data-line-numbers="6-7,11">#include "ticlib.h"
+
+int main()
+{
+  string s {""};
+  cout << "Escriba su nombre: ";
+  cin >> s;
+  if ('a' <= s[0] && s <= 'z') {
+    s[0] -= 32;
+  }
+  cout << "Hello, " << s << "\n";
+}</code></pre>
+                    </section>
+                    <section>
+                        <h3>Flujo de datos</h3>
+                        <p>Procedimientos: <span style="color:red">llamante</span> ==> <span style="color:blue" >llamado</span></p>
+                        <img src="img/flujo-datos-1.jpg">
+                    </section>
+                    <section>
+                        <h3>Flujo de datos</h3>
+                        <p>Procedimiento sin <span style="color:red" >efectos externos</span></p>
+                        <pre><code data-line-numbers="3-19,29">#include "ticlib.h"
+
+void useless(double base, int exponent)
+{
+  double result {1};
+  if (base == 0 && exponent != 0) {
+    result = 0;
+  }
+  else if (base !=0) {
+    if (exponent < 0) {
+      base = 1/base;
+      exponent = -exponent;
+    }
+    while (exponent > 0) {
+      result = result * base;
+      exponent--;
+    }
+  }
+}
+
+int main()
+{
+  cout << "Escriba la base: ";
+  double base;
+  cin >> base;
+  cout << "Escriba el exponente: ";
+  int exponent;
+  cin >> exponent;
+  useless(base, exponent);
+}</code></pre>
+                        <a href="http://15.236.61.248" target="_blank">Ver ejecución</a>
+                    </section>
+                    <section>
+                        <h3>Flujo de datos</h3>
+                        <p><a href="http://15.236.61.248" target="_blank">Funciones</a>: <span style="color:red">llamante</span> <==> <span style="color:blue" >llamado</span></p>
+                        <img src="img/flujo-datos-2.jpg">
+                    </section>
+                    <section data-background-iframe="https://repl.it/@MANUELPEREZPIAR/functions-intro-1?lite=true" data-background-interactive></section>
+                    <section>
+                        <h3>Resumen</h3>
+                        <img src="img/function-vs-procedure.jpg" >
+                    </section>
+                </section> <!-- Qué es -->
+                <section><!-- Definición -->
+                    <h2>Sintaxis de definición</h2>
+                    <div class="r-stack" >
+                        <img class="fragment fade-in" src="img/function-definition-syntax.jpg" >
+                        <img class="fragment fade-in" src="img/function-definition-syntax-1.jpg" >
+                        <img class="fragment fade-in" src="img/function-definition-syntax-2.jpg" >
+                        <img class="fragment fade-in" src="img/function-definition-syntax-3.jpg" >
+                    </div>
+                </section><!-- Definición -->
+                <section><!-- Sentencia return -->
+                    <section>
+                        <p class="r-fit-text">Sentencia <span style="color:blue; font-family:Courier">return</span></p>
+                        <p class="fragment fade-up" style="color:blue">Especifica el valor devuelto</p>
+                        <p class="fragment fade-up" style="color:blue">Deben coincidir los tipos</p>
+                        <p class="fragment fade-up" style="color:red">Termina la ejecución de la función</p>
+                        <p class="fragment fade-up" style="color:red">Normalmente, está al final</p>
+                        <p class="fragment fade-up" style="color:red">Puede haber varias, pero sólo se ejecuta una</p>
+                    </section>
+                    <section>
+                        <p class="r-fit-text">Sentencia <span style="color:blue; font-family:Courier">return</span></p>
+                        <p style="color:blue" >Especifica el valor devuelto</p>
+                        <pre><code data-line-numbers="5">#include "ticlib.h"
+
+double longitud_circunferencia(double radio)
+{
+  return 2*3.141592*radio;
+}
+
+int main() {
+  double r;
+  cout << "Escriba el radio: ";
+  cin >> r;
+  cout << "Longitud: ";
+  cout << longitud_circunferencia(r) << "\n";
+}</code></pre>
+                    </section>
+                    <section>
+                        <p class="r-fit-text">Sentencia <span style="color:blue; font-family:Courier">return</span></p>
+                        <p style="color:blue" >Deben coincidir los tipos</p>
+                        <pre><code data-line-numbers="3|5">#include "ticlib.h"
+
+char saludo(string nombre)
+{
+  return "Hola, " + nombre + "\n";
+}
+
+int main()
+{
+  string usuario;
+  cout << "Su nombre? ";
+  cin >> usuario;
+  cout << saludo(usuario);
+}</code></pre>
+                    </section>
+                    <section>
+                        <p class="r-fit-text">Sentencia <span style="color:blue; font-family:Courier">return</span></p>
+                        <p style="color:red" >Termina la ejecución de la función</p>
+                        <pre><code data-line-numbers="1-13|8|9-12">int f(int x)
+{
+  bool par {x%2 == 0};
+  if (!par) {
+    x = x + 1;
+  }
+  x = x / 2;
+  return x;
+  x = 2*x;
+  if (!par) {
+    x = x - 1;
+  }
+}</code></pre>
+                    </section>
+                    <section>
+                        <p class="r-fit-text">Sentencia <span style="color:blue; font-family:Courier">return</span></p>
+                        <p style="color:red" >Termina la ejecución de la función</p>
+                        <p><a href="http://15.236.61.248" target="_blank">Ejemplo</a></p>
+                    </section>
+                </section><!-- Sentencia return -->
+                <section><!-- Llamada -->
+                    <section>
+                        <h3>Llamada a una función</h3>
+                        <p class="fragment fade-up" >Misma sintaxis que los procedimientos</p>
+                        <p class="fragment fade-up" >Representa al valor devuelto</p>
+                        <div class="r-stack" >
+                            <pre class="fragment fade-in"><code data-line-numbers="1-16|13">#include "ticlib.h"
+
+int valor_absoluto(int num)
+{
+  if (num < 0) {
+    return -num;
+  }
+  return num;
+}
+
+int main()
+{
+  cout << 2 * valor_absoluto(-3);
+}</code></pre>
+                            <pre class="fragment fade-in"><code data-line-numbers="3|5|6">#include "ticlib.h"
+
+int valor_absoluto(-3)
+{
+  if (-3 < 0) {
+    return -(-3);
+  }
+  return -3;
+}
+
+int main()
+{
+  cout << 2 * valor_absoluto(-3);
+}</code></pre>
+                            <pre class="fragment fade-in"><code data-line-numbers="13">#include "ticlib.h"
+
+int valor_absoluto(int num)
+{
+  if (num < 0) {
+    return -num;
+  }
+  return num;
+}
+
+int main()
+{
+  cout << 2 * 3;
+}</code></pre>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Llamada a una función</h3>
+                        <p class="fragment fade-up" >Forma parte de una expresión</p>
+                        <pre><code data-line-numbers="1-16|13|14|15">#include "ticlib.h"
+
+int valor_absoluto(int num)
+{
+  if (num < 0) {
+    return -num;
+  }
+  return num;
+}
+
+int main()
+{
+  int x {valor_absoluto(-5)};
+  x = valor_absoluto(-7);
+  cout << 2 * valor_absoluto(-3);
+}</code></pre>
+
+                    </section>
+                </section><!-- Llamada -->
+                <section><!-- Test -->
+                    <section>
+                        <p>¿Cuál es la salida por consola del programa siguiente?</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);"><span class="hljs-meta" style="color: rgb(43, 145, 175);">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string" style="color: rgb(163, 21, 21);">"ticlib.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">next</span><span class="hljs-params">(<span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> x)</span>
+</span>{
+  <span class="hljs-keyword" style="color: rgb(0, 0, 255);">return</span> x+<span class="hljs-number">1</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">opposite</span><span class="hljs-params">(<span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> x)</span>
+</span>{
+  <span class="hljs-keyword" style="color: rgb(0, 0, 255);">return</span> -x;
+}
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">main</span><span class="hljs-params">()</span>
+</span>{
+  <span class="hljs-built_in" style="color: rgb(0, 0, 255);">cout</span> &lt;&lt; next(opposite(<span class="hljs-number">1</span>)) &lt;&lt; opposite(next(<span class="hljs-number">1</span>));
+}
+</pre>
+<pre>a) 00        b) 0-2        c) -20        d) -2-2</pre>
+                    </section>
+                    <section>
+                        <p>¿Cuál es la salida por consola del programa siguiente?</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0);"><span class="hljs-meta" style="color: rgb(43, 145, 175);">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string" style="color: rgb(163, 21, 21);">"ticlib.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">f</span><span class="hljs-params">(<span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> x)</span>
+</span>{
+  x = x + <span class="hljs-number">1</span>;
+  x = <span class="hljs-number">2</span> * x;
+  x = x - <span class="hljs-number">2</span>;
+  <span class="hljs-keyword" style="color: rgb(0, 0, 255);">return</span> x;
+  x = x / <span class="hljs-number">2</span>;
+  <span class="hljs-keyword" style="color: rgb(0, 0, 255);">return</span> x;
+}
+
+<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> <span class="hljs-title" style="color: rgb(163, 21, 21);">main</span><span class="hljs-params">()</span>
+</span>{
+  <span class="hljs-keyword" style="color: rgb(0, 0, 255);">int</span> num{<span class="hljs-number">5</span>};
+  <span class="hljs-built_in" style="color: rgb(0, 0, 255);">cout</span> &lt;&lt; f(num);
+}</pre>
+<pre>a) 10        b) 5        c) 3        d) 2.5</pre>
+                    </section>
+                </section>
+                <section> <!-- Test -->
+                    <section>
+                        <p>¿Qué deberíamos escribir en lugar de la interrogación?</p>
+                        <pre><code>double inverse(double x)
+{
+    ? 1/x;
+}
+                        </code></pre>
+                        <pre>a) double        b) return        c) cout <<         d) cout >></pre>
+                    </section>
+                    <section>
+                        <p>¿Cuál es la salida por consola del siguiente programa?</p>
+                        <pre><code>#include "ticlib.h"
+
+string f(char c, int n)
+{
+    string s {};
+    for (int i {0}; i < n; ++i) {
+        s.push_back(c);
+    }
+    return s;
+}
+
+int main()
+{
+    string s {f('x', 3)};
+    cout << s;
+}
+                        </code></pre>
+                        <pre>a) s        b) x3        c) xxx        d) xx</pre>
+                    </section>
+                </section>
+                <section> <!-- Reglas de estilo -->
+                    <section>
+                        <h2>Reglas de estilo</h2>
+                    </section>
+                    <section data-transition="none-out">
+                        <h3>Nombres de funciones</h3>
+                        <p>Procedimientos: verbos</p>
+                        <pre><code data-line-numbers="1-5|7-11">// MAL
+void saludo(string nombre)
+{
+    cout << "Hola, " << nombre << "!\n";
+}
+
+// BIEN
+void saludar(string nombre)
+{
+    cout << "Hola, " << nombre << "!\n";
+}
+                        </code></pre>
+                    </section>
+                    <section data-transition="none-in slide-out">
+                        <h3>Nombres de funciones</h3>
+                        <p>Funciones: sustantivos/adjetivos</p>
+                        <pre><code data-line-numbers="1-5|7-11">// MAL
+int duplicar(int x)
+{
+    return 2*x;
+}
+
+// BIEN
+int doble(int x)
+{
+    return 2*x;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Tamaño de funciones</h3>
+                        <p>Cada procedimiento/función hace una sola cosa</p>
+                        <pre><code data-line-numbers="1-9|10-24">// MAL
+void print_welcome_and_menu()
+{
+    cout << "***** Welcome to the calculator ******\n\n";
+    cout << "Choose operation:\n";
+    cout << "1) Addition\n";
+    cout << "2) Product\n;"
+    cout << "3) Exit\n";
+}
+
+// BIEN
+void print_welcome()
+{
+    cout << "***** Welcome to the calculator ******\n\n";
+}
+
+void print_menu()
+{
+    cout << "Choose operation:\n";
+    cout << "1) Addition\n";
+    cout << "2) Product\n;"
+    cout << "3) Exit\n";
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Procedimientos vs. Funciones</h3>
+                        <p>Distinguir cálculos y efectos externos</p>
+                        <pre><code data-line-numbers="1-16|18-38">// MAL
+void print_max(vector&lt;int&gt; v)
+{
+  if (v.size() > 0) {
+    int maximum {v[0]};
+    for (int x : v) {
+      if (x > maximum) {
+        maximum = x;
+      }
+    }
+    cout << "Valor máximo: " << maximum << "\n";
+  }
+  else {
+    cout << "Vector vacío.\n";
+  }
+}
+
+// BIEN
+int max(vector&lt;int&gt; v)
+{
+  int maximum {v[0]};
+  for (int x : v) {
+    if (x > maximum) {
+      maximum = x;
+    }
+  }
+  return maximum;
+}
+
+void print_max(vector&lt;int&gt; v)
+{
+  if (v.size() > 0) {
+    cout << "Valor máximo: " << max(v) << "\n";
+  }
+  else {
+    cout << "Vector vacío.\n";
+  }
+}
+                        </code></pre>
+                    </section>
+                </section> <!-- Reglas de estilo -->
+                <section>
+                    <h3><span style="font-family:Courier" >main</span> es una función</h3>
+                    <pre><code data-line-numbers="1-10|9">#include "ticlib.h"
+
+int main()
+{
+    cout << "Esto es una función.\n";
+    int resultado {0};
+    cout << "Qué valor quieres que devuelva? ";
+    cin >> resultado;
+    return resultado;
+}</code></pre>
+                </section>
+                <section><!-- Composición -->
+                    <section>
+                        <h3>Ventajas de las funciones</h3>
+                        <p class="fragment fade-up" >Evita repeticiones</p>
+                        <p class="fragment fade-up" >Facilita los cambios</p>
+                        <p class="fragment fade-up" >Localiza los errores</p>
+                        <p class="fragment fade-up" >Facilita la composición</p>
+                    </section>
+                    <section data-background-iframe="https://repl.it/@MANUELPEREZPIAR/functions-intro-1?lite=true" data-background-interactive></section>
+                    <section data-background-iframe="https://repl.it/@MANUELPEREZPIAR/composition?lite=true" data-background-interactive></section>
+                </section> <!-- Composición -->
+
+            </div>
+        </div>
+
+
+        <script src="dist/reveal.js"></script>
+        <script src="plugin/notes/notes.js"></script>
+        <script src="plugin/markdown/markdown.js"></script>
+        <script src="plugin/highlight/highlight.js"></script>
+        <script>
+         // More info about initialization & config:
+         // - https://revealjs.com/initialization/
+         // - https://revealjs.com/config/
+         Reveal.initialize({
+             hash: true,
+             /* disableLayout: true, */
+
+             // Learn about plugins: https://revealjs.com/plugins/
+             plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+         });
+        </script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="/__/firebase/8.1.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+
+        <!-- Initialize Firebase -->
+        <script src="/__/firebase/init.js"></script>
+    </body>
+</html>
