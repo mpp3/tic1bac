@@ -11,3 +11,34 @@
     margin: 20px;
     z-index: 1;
 }
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200,200,200);
+    letter-spacing: 1px;
+}
+
+td, th {
+    border: 1px solid rgb(190,190,190);
+    padding: 10px 20px;
+}
+
+th {
+    background-color: rgb(235,235,235);
+}
+
+td {
+    text-align: center;
+}
+
+tr:nth-child(even) td {
+    color: red;
+}
+
+tr:nth-child(odd) td {
+    color: green;
+}
+
+caption {
+    padding: 10px;
+}
