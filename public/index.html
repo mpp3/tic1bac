@@ -29,17 +29,26 @@
                  let label = new Label({
                      text: topic.title,
                      size: 80,
-                     color: colors[i++]
+                     color: light,
+                     rollColor: dark
+                 });
+                 let button = new Button({
+                     label: label,
+                     width: 0.8*stageW,
+                     height: 100,
+                     backgroundColor: "rgb(140, 39, 37)",
+                     rollBackgroundColor: orange
                  }).cur();
-                 label.on("click", () => window.location = topic.link);
-                 labels.push(label);
+                 button.on("click", () => window.location = topic.link);
+                 labels.push(button);
              }
              let topics_list = new Tile({
                  obj: labels,
                  unique: true,
                  align: "center",
                  cols: 1,
-                 rows: labels.length
+                 rows: labels.length,
+                 spacingV: 10
              }).center();
 
              stage.update();
